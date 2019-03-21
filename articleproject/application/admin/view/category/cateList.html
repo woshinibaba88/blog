@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>分类展示</title>
+    <style>
+        tr{
+            height: 35px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <table border="1"style="width: 700px;">
+        <thead>
+            <tr>
+                <td>分类id</td>
+                <td>分类名称</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody id="show">
+            {volist name="cateInfo" id="v"}
+            <tr>
+              <td>{$v.cate_id}</td>
+              <td>{$v.cate_name}</td>
+              <td><a href="{:url('Category/cateDel')}?cate_id={$v.cate_id}}">删除</a>
+                   |
+                  <a href="{:url('Category/cateUpd')}?cate_id={$v.cate_id}">修改</a>
+            {/volist}
+        </tbody>
+    </table>
+</body>
+</html>

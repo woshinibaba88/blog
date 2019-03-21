@@ -1,0 +1,8 @@
+<div class="news">
+    <div class="title"><h3>全部新闻</h3><a href="#">更多&gt;&gt;</a></div>
+            <ul class="width">
+            {volist name="textInfo" id="v"}
+            <li><span>{$v.create_time}</span>  <a  href="{:url('Text/textContent')}?text_id={$v.text_id}">{$v.text_name}</a></li>
+            {/volist}
+        </ul>
+</div>

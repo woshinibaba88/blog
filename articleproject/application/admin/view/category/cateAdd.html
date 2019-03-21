@@ -1,0 +1,59 @@
+<body>
+<form class="layui-form" action=""> <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+    
+    <!-- 分类名称 cate_name -->
+    <div class="layui-form-item">
+        <label class="layui-form-label">分类名称</label>
+        <div class="layui-input-inline">
+        <input type="text" name="cate_name" placeholder="请输入分类名称"  lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div> 
+    
+    
+    
+
+    <br/>
+    
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+
+<script>
+layui.use(['form','layer'], function(){
+    var form = layui.form;
+    var layer = layui.layer;
+    form.on('submit(formDemo)', function(data){
+    $.post(
+       "{:url('Category/cateAdd')}", 
+        data.field,//当前容器的全部表单字段
+        function(res){
+           if(res.code==1){
+                layer.open({
+                    content: '🐖恭喜小主，添加成功'
+                    ,btn:['继续添加','进入展示页面']
+                    ,yes:function(index,layero){
+                    location.href="{:url('Category/cateAdd')}";
+                    },
+                    btn2:function(index,layero){
+                        location.href="{:url('Category/cateList')}"
+                    }
+                    ,cancel: function(){
+                        location.href="{:url('Category/cateList')}"
+                    }
+                })
+            }else{
+                layer.alert(res.font,{icon:res.code});
+            }
+        },
+        'json'
+        );
+    return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+});
+});
+</script>
+</body>
+</html>

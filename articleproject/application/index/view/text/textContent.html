@@ -1,0 +1,50 @@
+<div class="article" text_id={$Info.text_id} >
+    <h3>{$Info.text_name}</h3>
+    <p>{$Info.text_text}</p>
+</div>
+</div>
+<p><span id="xin" style="cursor: pointer;">💗</span><span  {if condition="$res neq ''"}style="color:red;"{else/}style="color:red;display: none;"{/if} id="yizan">已赞</span>({$cou})   <a {if condition="$res eq ''"}style="padding-left:10px; display: none;cursor: pointer;"{else/}style="padding-left:5px;cursor: pointer;"{/if} id="del">取消</a></p>
+<script src="__STATIC__/jquery-3.2.1.min.js"></script>
+<script>
+    $(function(){
+
+   
+    $("#xin").click(function(){
+        var text_id=$(".article").attr("text_id");
+       // alert(text_id)
+        $.post(
+           "{:url('Text/textCon')}",
+           {text_id:text_id},
+            function(res){
+                if(res=='1'){
+                    alert("点赞成功");
+                    $("#yizan").show();
+                    $("#del").show();
+                }else if(res=='2'){
+                    alert("请不要重复点赞");
+                }else{
+                    alert("点赞失败");
+                }
+            }
+       )
+    }) 
+    $("#del").click(function(){
+        var text_id=$(".article").attr("text_id");
+        $.post(
+            "{:url('Text/del')}",
+            {text_id:text_id},
+            function(res){
+                if(res==1){
+                    alert("取消成功")
+                }else if(res==2){
+                    alert("取消失败")
+                }else{
+                    alert("亲！您还没点赞哦！！！")
+                }
+            }
+        )
+    })
+
+
+    })
+</script>

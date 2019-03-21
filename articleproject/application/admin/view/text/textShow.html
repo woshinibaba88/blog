@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+<body>
+ 
+<table id="test" lay-filter="test"></table>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script>
+layui.use('table', function(){
+  var table = layui.table;
+  
+  //第一个实例
+  table.render({
+    elem: '#test'
+    ,url: "{:url('Text/t_list')}" //数据接口
+    ,page: true //开启分页
+    ,cols: [[ //表头
+      {field: 'text_id', title: 'ID', width:81, sort: true, fixed: 'left'}
+      ,{field: 'text_name', title: '名称', width:250}
+      ,{field: 'text_text', title: '文章内容', width:500, sort: true}
+      ,{field: 'create_time', title: '添加时间', width:300, sort: true}
+      ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
+        ]]
+            ,page:false
+  });
+  
+});
+</script>
+</body>
+</html>
+<script>
+    layui.use(['table','layer'], function(){
+    var table = layui.table;
+    var layer = layui.layer;
+    //监听行工具事件
+    table.on('tool(test)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'del'){
+                layer.confirm('真的删除行么', function(index){
+                    $.get('delete',{id:data.text_id},function(res){
+                        if(res==1){
+                            obj.del();
+                            layer.close(index);
+                            table.reload('testReload')
+                        }else{
+                            layer.alert('删除失败');
+                        }
+                    });
+
+                });
+            } else if(obj.event === 'edit'){
+                layer.confirm('确认要修改吗', function(index){
+                    //console.log();
+                    location.href='up?id='+data.text_id;
+                })
+            }
+            else if(obj.event === 'sku'){
+                layer.confirm('是否展示货品列表', function(index){
+                    //console.log();
+                    location.href='sku?id='+data.text_id;
+                })
+            }
+        });
+    });
+
+</script>

@@ -1,0 +1,47 @@
+<div style="padding:15px">
+        <form class="layui-form"> <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+            <input type="hidden" name="text_id" value="{$arr.text_id}">
+            <div class="layui-form-item">
+                <label class="layui-form-label">文章名称</label>
+                <div class="layui-input-inline">
+                    <!--  -->
+                  <input type="text" name="text_name" required lay-verify="required|username" value="{$arr.text_name}"  placeholder="请输入标题" autocomplete="off" class="layui-input">
+                </div>
+              </div>
+          <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">文章描述</label>
+            <div class="layui-input-inline">
+              <textarea placeholder="请输入内容" class="layui-textarea" name="text_text" >{$arr.text_text}</textarea>
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <div class="layui-input-block">
+              <button class="layui-btn" lay-submit lay-filter="*">立即修改</button>
+              <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+          </div>
+          <!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
+        </form>
+        <script>
+          layui.use(['form','layer'],function(data){
+            var form=layui.form;
+            var layer=layui.layer;
+          form.on('submit(*)', function(data){
+          $.post(
+            "{:url('Text/upd')}",
+            data.field,
+            function(res){
+                // console.log(res)
+              layer.msg(res.font,{icon:res.code});
+                if(res.code==1){
+                  location.href="{:url('Text/show')}"
+                }
+            },
+            'json'
+          );
+          return false;
+        });
+        });
+        </script>
+        </body>
+        </html>
