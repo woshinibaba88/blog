@@ -26,9 +26,9 @@
     <link href="{{url('css/login.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('css/vccode.css')}}" rel="stylesheet" type="text/css" />
 
-    {{--<link href="css/comm.css" rel="stylesheet" type="text/css" />--}}
-    {{--<link href="css/login.css" rel="stylesheet" type="text/css" />--}}
-    {{--<link href="css/find.css" rel="stylesheet" type="text/css" />--}}
+    {{--<link href="{{url('css/comm.css')}}" rel="stylesheet" type="text/css" />--}}
+    {{--<link href="{{url('css/login.css')}}" rel="stylesheet" type="text/css" />--}}
+    {{--<link href="{{url('css/find.css')}}" rel="stylesheet" type="text/css" />--}}
     {{--<script src="{{url('js/jquery190_1.js')}}" language="javascript" type="text/javascript"></script>--}}
     <style>
         .Countdown-con {padding: 4px 15px 0px;}
