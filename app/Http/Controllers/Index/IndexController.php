@@ -201,4 +201,19 @@ class IndexController extends Controller
             echo "失败";
         }
     }
+    /*
+     * @批量删除
+     * */
+    public function paydel(Request $request)
+    {
+        $car_id=rtrim($request->car_id,',');
+        $car_id=explode(',',$car_id);
+        foreach($car_id as $v){
+            $model=new Car();
+            $res=$model->where("car_id","=",$v)->delete();
+            if(!$res){
+                echo "删除失败";die;
+            }
+        }
+    }
 }

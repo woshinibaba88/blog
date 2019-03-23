@@ -13,7 +13,7 @@
             <ul id="cartBody">
                 @foreach($data as $v)
                 <li>
-                    <s class="xuan current" self_price="{{$v->self_price}}"></s>
+                    <s class="xuan current" self_price="{{$v->self_price}}" car_id="{{$v->car_id}}"></s>
                     <a class="fl u-Cart-img" href="/v44/product/12501977.do">
                         <img src="{{url($v->goods_img)}}" border="0" alt="">
                     </a>
@@ -42,7 +42,7 @@
 
                 </dt>
                 <dd>
-                    <a href="javascript:;" id="a_payment" class="orangeBtn w_account remove">删除</a>
+                    <a href="javascript:;" id="a_paydel" class="orangeBtn w_account remove">删除</a>
                     <a href="javascript:;" id="a_payment" class="orangeBtn w_account">去结算</a>
                 </dd>
             </dl>
@@ -171,6 +171,7 @@
                     if(res==3){
                         location.href=("{{url('user/login')}}");
                     }
+                    location.href="{{url('index/indexshopcar')}}";
                 }
             )
         })
@@ -246,10 +247,31 @@
                 {_token:_token,car_id:car_id},
                 function(res){
                     if(res==1){
+                        location.href="{{url('index/indexshopcar')}}";
                         $(this).parents("li").empty();
                     }else{
 
                     }
+                }
+            )
+        })
+        //批量删除
+        $(document).on("click","#a_paydel",function() {
+            var _token=$("#_token").val();
+            var car_id='';
+            $(".g-Cart-list .xuan").each(function () {
+                if ($(this).hasClass("current")) {
+                    for (var i = 0; i < $(this).length; i++) {
+                        car_id+= $(this).attr("car_id")+',';
+                    }
+                }
+            })
+            console.log(car_id)
+            $.post(
+                "{{url('index/paydel')}}",
+                {_token:_token,car_id:car_id},
+                function(res){
+                    location.href="{{url('index/indexshopcar')}}";
                 }
             )
         })
