@@ -56,3 +56,9 @@ Route::any("user/phone","Index\UserController@phone");
 
 
 Route::any("user/registerdo","Index\UserController@registerDo");
+
+
+
+
+Route::any("address/payment","Index\AddressController@payment");
+Route::any("address/witeaddr","Index\AddressController@witeaddr");

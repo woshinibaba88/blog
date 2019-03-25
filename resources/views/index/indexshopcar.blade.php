@@ -13,7 +13,7 @@
             <ul id="cartBody">
                 @foreach($data as $v)
                 <li>
-                    <s class="xuan current" self_price="{{$v->self_price}}" car_id="{{$v->car_id}}"></s>
+                    <s class="xuan current" self_price="{{$v->self_price}}" car_id="{{$v->car_id}}" goods_id="{{$v->goods_id}}"></s>
                     <a class="fl u-Cart-img" href="/v44/product/12501977.do">
                         <img src="{{url($v->goods_img)}}" border="0" alt="">
                     </a>
@@ -272,6 +272,26 @@
                 {_token:_token,car_id:car_id},
                 function(res){
                     location.href="{{url('index/indexshopcar')}}";
+                }
+            )
+        })
+        //结算
+        $(document).on("click","#a_payment",function(){
+            var _token=$("#_token").val();
+            var goods_id='';
+            $(".g-Cart-list .xuan").each(function () {
+                if ($(this).hasClass("current")) {
+                    for (var i = 0; i < $(this).length; i++) {
+                        goods_id+= $(this).attr("goods_id")+',';
+                    }
+                }
+            })
+            console.log(goods_id)
+            $.post(
+                "{{url('address/payment')}}",
+                {_token:_token,goods_id:goods_id},
+                function(res){
+                    location.href="{{url('address/payment')}}";
                 }
             )
         })

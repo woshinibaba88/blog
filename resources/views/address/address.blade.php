@@ -18,7 +18,7 @@
 <div class="m-block-header" id="div-header">
     <strong id="m-title">地址管理</strong>
     <a href="javascript:history.back();" class="m-back-arrow"><i class="m-public-icon"></i></a>
-    <a href="/" class="m-index-icon">添加</a>
+    <a href="{{url('address/witeaddr')}}" class="m-index-icon">添加</a>
 </div>
 <div class="addr-wrapp">
     <div class="addr-list">
